@@ -1,0 +1,6 @@
+# 넥스트레이드(.KNT) 가격 수집·분석 의존성 (검증 버전 — 2026-05-31)
+# LSEG Workspace 데스크톱 앱이 실행 중이어야 ld.open_session()이 로컬 세션으로 붙는다.
+lseg-data==2.1.1
+pandas==2.3.3
+numpy==2.3.5
+pyarrow==22.0.0
