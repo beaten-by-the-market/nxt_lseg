@@ -7,22 +7,31 @@
     agg = aggregate_sessions(df)
     ld.close_session()
 """
+import datetime as dt
+
 import lseg.data as ld
 import pandas as pd
 
 OHLC_FIELDS = ["OPEN_PRC", "HIGH_1", "LOW_1", "TRDPRC_1", "ACVOL_UNS"]
 
-# 넥스트레이드 세션 경계 (KST). NXT 공식 운영시간 기준으로 필요시 조정:
-#   프리마켓 08:00~08:50 / 메인 09:00~15:30 / 애프터마켓 15:30~20:00
-PRE_END = pd.Timestamp("09:00").time()
-REG_END = pd.Timestamp("15:30").time()
+# 넥스트레이드 세션 경계 (KST). 정규 개장·폐장 기준:
+#   프리 ~09:00 / 정규 09:00~15:30 / 애프터 15:30~
+PRE_END = dt.time(9, 0)
+REG_END = dt.time(15, 30)
+
+# 특수 운영시간(±순연)일 — KRX 일정에 따라 NXT도 동일 적용. (date → (pre_end, reg_end))
+#  수능일: 개장·폐장 모두 +1h. 신년 개장일: 개장만 +1h(프리 없음, 폐장 정상이라 기본값으로 충분).
+SPECIAL_BOUNDS = {
+    dt.date(2025, 11, 13): (dt.time(10, 0), dt.time(16, 30)),  # 2026학년도 수능
+}
 
 
 def _session(ts):
+    pre_end, reg_end = SPECIAL_BOUNDS.get(ts.date(), (PRE_END, REG_END))
     t = ts.time()
-    if t < PRE_END:
+    if t < pre_end:
         return "pre"
-    if t < REG_END:
+    if t < reg_end:
         return "regular"
     return "after"
 

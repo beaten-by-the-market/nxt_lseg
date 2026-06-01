@@ -5,6 +5,13 @@ data/raw/
 # 수집 진행 상태 (런타임 산출물)
 data/collect_progress.json
 
+# 대용량 파생물 (재생성 가능 — metrics.py / case_finder.py 로 복원)
+data/panel_sessions.csv
+data/figs/
+
+# 로컬 에이전트/에디터 설정
+.claude/
+
 # 가상환경
 .venv/
 venv/

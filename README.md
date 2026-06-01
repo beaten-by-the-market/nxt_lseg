@@ -23,9 +23,9 @@ LSEG Data Library(`lseg.data`)로 **넥스트레이드(NXT) 거래소**의 한�
 |---|---|---|---|
 | **1. Universe** | [1_NXT_UNIVERSE.md](1_NXT_UNIVERSE.md) | [code/nxt_universe.py](code/nxt_universe.py) | `data/nxt_universe.csv` |
 | **2. 30분봉 수집** | [2_NXT_PRICE_HISTORY.md](2_NXT_PRICE_HISTORY.md) | [code/collect_all.py](code/collect_all.py), [code/nxt_price_history.py](code/nxt_price_history.py) | `data/raw/{종목}.parquet` |
-| **3. 분석** | [3_NXT_ANALYSIS.md](3_NXT_ANALYSIS.md) | [code/metrics.py](code/metrics.py) | `data/panel_sessions.{parquet,csv}` |
+| **3. 분석** | [3_NXT_ANALYSIS.md](3_NXT_ANALYSIS.md) | [metrics](code/metrics.py)·[analyze](code/analyze.py)·[case_finder](code/case_finder.py)·[jumpiness](code/jumpiness.py)·[krx_control](code/krx_control.py)·[plot_cases](code/plot_cases.py)·[cross_analysis](code/cross_analysis.py) | `panel_sessions`·`analysis_summary.md`·`jump_cases.csv`·`jumpiness_ranking.csv`·`cross_*.csv`·`figs/news_*.png` |
 
-## 핵심 사실 (라이브 검증 — 2026-05-31, `lseg.data 2.1.1`, 계정 data01@krx.co.kr)
+## 핵심 사실 (라이브 검증 — 2026-05-31, `lseg.data 2.1.1`)
 
 - 세션은 `ld.open_session()` — **LSEG Workspace 데스크톱 앱이 실행 중**이어야 로컬 세션 연결.
 - venue 구분은 **RIC 접미사**: `.KS`=KRX(KOSPI), `.KQ`=KOSDAQ, **`.KNT`=넥스트레이드(NXT)**.
